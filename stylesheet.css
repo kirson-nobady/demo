@@ -1,0 +1,758 @@
+<style>
+/* General Resets & Variables */
+:root {
+    --primary-color: #A6292B; /* Deep Red/Burgundy - Replace with your brand's primary */
+    --secondary-color: #2F3E46; /* Dark Green/Charcoal - Replace with your brand's secondary */
+    --accent-color: #E0B423; /* Gold/Amber for highlights */
+    --light-bg: #F5F5F5; /* Light grey background */
+    --dark-bg: #1A1A1A; /* Very dark background for footer/header details */
+    --text-color: #333333;
+    --light-text-color: #ffffff;
+    --border-color: #e0e0e0;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+    --max-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--text-color);
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 25px; /* More padding for a softer look */
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 14px 30px;
+    border-radius: 50px; /* Pill-shaped buttons */
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+
+/* Header */
+.main-header {
+    background-color: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px; /* Adjust logo height as needed */
+    width: auto;
+    display: block;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 35px;
+}
+
+.main-nav ul li a {
+    color: var(--secondary-color);
+    font-weight: 600;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+    position: relative;
+    text-decoration: none;
+    font-size: 1.05em;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active { /* Add active class for current page */
+    color: var(--primary-color);
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a.active::after {
+    width: 100%;
+}
+
+.header-icons {
+    display: flex;
+    gap: 25px;
+}
+
+.header-icons a {
+    color: var(--secondary-color);
+    font-size: 22px;
+    transition: color 0.3s ease;
+}
+
+.header-icons a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: var(--accent-color);
+    color: #fff;
+    font-size: 13px;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-weight: 700;
+    line-height: 1; /* Adjust to vertically center number */
+}
+
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+/* Hero Section (Homepage Specific) */
+.hero-section {
+    background: url('images/hero-bg.jpg') no-repeat center center/cover; /* Replace with your hero image */
+    color: #fff;
+    text-align: center;
+    padding: 120px 20px;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero-content h1 {
+    font-size: 4.5em;
+    margin-bottom: 25px;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    line-height: 1.1;
+}
+
+.hero-content p {
+    font-size: 1.6em;
+    margin-bottom: 50px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* About Promo Section */
+.about-promo-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.about-promo-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-promo-text {
+    flex: 1;
+}
+
+.about-promo-text h2 {
+    font-size: 3em;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.about-promo-text p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.about-promo-image {
+    flex: 1;
+    text-align: center;
+}
+
+.about-promo-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Featured Products Section */
+.featured-products-section {
+    padding: 80px 0;
+    background-color: #E0B423;
+    text-align: center;
+}
+
+.featured-products-section h2 {
+    font-size: 3.2em;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.product-card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-bottom: 20px; /* Padding for button */
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.product-card img {
+    width: 100%;
+    height: 300px; /* Consistent height for product images */
+    object-fit: cover;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.product-card h3 {
+    font-size: 1.8em;
+    margin: 0 20px 10px;
+    color: var(--secondary-color);
+}
+
+.product-card p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+.product-card .btn {
+    width: calc(100% - 40px); /* Full width within card padding */
+    margin: 0 20px; /* Center button */
+}
+
+.view-all-button {
+    margin-top: 30px;
+}
+
+/* Call to Action Section (Generic) */
+.cta-section {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.cta-section h2 {
+    font-size: 3.5em;
+    color: var(--light-text-color);
+    margin-bottom: 25px;
+}
+
+.cta-section p {
+    font-size: 1.4em;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.cta-section .btn {
+    font-size: 1.1em;
+    padding: 16px 35px;
+}
+
+/* Page Hero Section (for Portfolio, Products, About, Contact) */
+.page-hero-section {
+    background-color: var(--light-bg);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-hero-section h1 {
+    font-size: 4em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.page-hero-section p {
+    font-size: 1.3em;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+
+/* Portfolio Grid Section */
+.portfolio-grid-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block; /* Make the whole card clickable */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 350px; /* Fixed height for portfolio images */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.portfolio-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--secondary-color-rgb, 47, 62, 70), 0.7); /* Use RGB for opacity */
+    color: var(--light-text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
+
+.portfolio-item .overlay h3 {
+    color: var(--light-text-color);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.portfolio-item .overlay p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1em;
+    margin-bottom: 0;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--dark-bg);
+    color: var(--light-text-color);
+    padding: 60px 0 25px;
+    font-size: 0.95em;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 35px;
+    margin-bottom: 50px;
+}
+
+.footer-col h3 {
+    color: var(--light-text-color);
+    margin-bottom: 25px;
+    font-size: 1.4em;
+}
+
+.footer-col p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: rgba(255,255,255,0.7);
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.social-icons a {
+    color: var(--light-text-color);
+    font-size: 24px;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.newsletter-form input[type="email"] {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
+    width: 100%;
+}
+
+.newsletter-form input[type="email"]::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.newsletter-form button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.newsletter-form button:hover {
+    background-color: var(--accent-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+    margin-top: 40px;
+    color: rgba(255,255,255,0.6);
+}
+
+.footer-bottom p {
+    margin-bottom: 8px;
+}
+
+.footer-bottom .fa-heart {
+    color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .main-nav ul {
+        gap: 25px;
+    }
+    .hero-content h1 {
+        font-size: 3.5em;
+    }
+    .hero-content p {
+        font-size: 1.4em;
+    }
+    .about-promo-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .about-promo-image img {
+        max-width: 80%;
+    }
+    .products-section h2,
+    .cta-section h2,
+    .page-hero-section h1 {
+        font-size: 2.8em;
+    }
+    .cta-section p {
+        font-size: 1.2em;
+    }
+    .product-grid, .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-wrap: wrap;
+        justify-content: space-between; /* Keep logo and toggle on opposite sides */
+    }
+
+    .logo {
+        margin-right: auto; /* Push logo to left */
+    }
+
+    .main-nav {
+        order: 3;
+        flex-basis: 100%;
+        margin-top: 20px;
+        display: none; /* Hidden by default for mobile */
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border-radius: 8px;
+        padding: 15px 0;
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--light-bg);
+    }
+
+    .main-nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    .main-nav ul li a {
+        padding: 15px 0;
+        display: block;
+    }
+
+    .header-icons {
+        order: 2; /* Position icons next to toggle */
+        margin-left: 20px; /* Spacing from toggle */
+        gap: 15px;
+    }
+    
+    .menu-toggle {
+        display: block; /* Show toggle button */
+        order: 1; /* Position toggle near logo */
+    }
+
+    .hero-content h1 {
+        font-size: 2.8em;
+    }
+    .hero-content p {
+        font-size: 1.2em;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn {
+        width: 80%; /* Make buttons wider on mobile */
+        margin: 0 auto;
+    }
+    .about-promo-text h2 {
+        font-size: 2.5em;
+    }
+    .products-section h2,
+    .cta-section h2,
+    .page-hero-section h1 {
+        font-size: 2.5em;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+    .newsletter-form {
+        align-items: center;
+    }
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9em;
+    }
+    .products-section h2,
+    .cta-section h2,
+    .page-hero-section h1 {
+        font-size: 2em;
+    }
+    .product-grid, .portfolio-grid {
+        grid-template-columns: 1fr; /* Stack all cards on smallest screens */
+    }
+    .product-card img, .portfolio-item img {
+        height: 250px; /* Adjust image height for smaller screens */
+    }
+}
+
+/* Specific styles for RGB conversion for overlay opacity */
+.portfolio-item .overlay {
+    background-color: rgba(var(--secondary-color-rgb, 47, 62, 70), 0.7);
+}
+/* Helper for CSS variables (e.g., if you change --secondary-color in :root) */
+/* You'd manually update this or use a CSS preprocessor like SASS */
+:root {
+    --secondary-color-rgb: 47, 62, 70; /* Corresponds to #2F3E46 */
+}
+</style>
